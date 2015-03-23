@@ -5,31 +5,6 @@ require_once('functions.php');
 
 session_start();
 
-function setToken() {
-	$token = sha1(uniqid(mt_rand(), true));
-	$_SESSION['token'] = $token;
-}
-
-function checkToken() {
-	if (empty($_SESSION['token']) || ($_SESSION['token'] != $_POST['token'])) {
-		echo "不正な処理が行われました。";
-		exit;
-	}
-}
-
-function emailExists($email, $dbh) {
-	$sql = "select * from users where email = :email limit 1";
-	$stmt = $dbh->prepare($sql);
-	$stmt->execute(array(":email" => $email));
-	$user = $stmt->fetch();
-	return $user ? true : false;
-}
-
-function getSha1Password($s) {
-	return (sha1(PASSWORD_KEY.$s));
-}
-
-
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 	// CSRF対策
 	setToken();
@@ -104,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 		<p>メールアドレス：<input type="text" name="email" value="<?php echo h($email) ?>"><?php echo h($err['email']) ?></p>
 		<p>パスワード：<input type="password" name="password" value=""><?php echo h($err['password']) ?></p>
 		<input type="hidden" name="token" value="<?php echo h($_SESSION['token']) ?>">
-		<p><input type="submit" value="ログイン"> <a href="signup.php">戻る</a></p>
+		<p><input type="submit" value="ログイン"> <a href="login.php">戻る</a></p>
 	</form>
 </body>
 

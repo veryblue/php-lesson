@@ -21,6 +21,7 @@ if (empty($_SESSION['me'])) {
 </head>
 <body>
 	<h1>ユーザー一覧</h1>
+	<p><pre><?php var_dump($_SESSION); ?></p>
 </body>
 
 
