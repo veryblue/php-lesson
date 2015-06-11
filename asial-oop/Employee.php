@@ -10,6 +10,7 @@ class Employee extends Person
 	public function __construct($name, $service_years)
 	{
 		$this->setName($name);
+		// parent::__construct($name); // 親のコンストラクタを呼ぶ		
 		$this->setServiceYears($service_years);
 	}
 
