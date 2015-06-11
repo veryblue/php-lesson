@@ -21,6 +21,11 @@ class Person
     	$this->name = trim($name);
     }
 
+    public function getName()
+    {
+    	return $this->name;
+    }
+
     public function setAge($age)
     {
     	$this->age = trim($age);
