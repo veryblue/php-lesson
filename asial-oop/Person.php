@@ -2,7 +2,12 @@
 
 class Person 
 {
-    public $name = '';
+    private $name = '';
+
+    public function setName($name)
+    {
+    	$this->name = trim($name);
+    }
 
     public function sayHello()
     {
