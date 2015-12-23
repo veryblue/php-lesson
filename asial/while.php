@@ -2,17 +2,14 @@
 
 // while分テスト
 
-	$i = 1;
+    $i = 1;
 
-	while ($i <= 31) {
+    while ($i <= 31) {
+        echo "$i";
 
-		print "$i";
+        if ($i % 7 == 0) {
+            echo '<br>';
+        }
 
-		if ($i % 7 == 0) {
-			print "<br>";
-		}
-
-		$i = $i + 1;
-	}
-
-?>
+        $i = $i + 1;
+    }

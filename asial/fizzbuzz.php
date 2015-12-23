@@ -2,19 +2,18 @@
 
 // FizzBuzz
 
-	$i = 1;
+    $i = 1;
 
-	while ($i <= 100) {
-
-		if ($i % 3 == 0 && $i % 5 == 0) {
-			print "FizzBuzz";
-		} else if ($i % 3 == 0) {
-			print "Fizz";
-		} else if ($i % 5 == 0) {
-			print "Buzz";
-		} else {
-			print "$i";
-		}
-		print "<br>";
-		$i++;
-	}
+    while ($i <= 100) {
+        if ($i % 3 == 0 && $i % 5 == 0) {
+            echo 'FizzBuzz';
+        } elseif ($i % 3 == 0) {
+            echo 'Fizz';
+        } elseif ($i % 5 == 0) {
+            echo 'Buzz';
+        } else {
+            echo "$i";
+        }
+        echo '<br>';
+        $i++;
+    }
