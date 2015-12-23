@@ -1,27 +1,27 @@
 <?php
 
-require_once('config.php');
-require_once('functions.php');
+require_once 'config.php';
+require_once 'functions.php';
 
 session_start();
 
 if (empty($_SESSION['me'])) {
-	header('Location: '.SITE_URL.'login.php');
-	exit;
+    header('Location: '.SITE_URL.'login.php');
+    exit;
 }
 
 $me = $_SESSION['me'];
 
 $dbh = connectDb();
 
-$sql ="select * from users where id = :id limit 1";
+$sql = 'select * from users where id = :id limit 1';
 $stmt = $dbh->prepare($sql);
-$stmt->execute(array(":id" => (int)$_GET[id]));
+$stmt->execute([':id' => (int) $_GET[id]]);
 $user = $stmt->fetch();
 
 if (!$user) {
-	echo "no such user!";
-	exit;
+    echo 'no such user!';
+    exit;
 }
 
 ?>

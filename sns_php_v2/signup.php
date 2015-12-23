@@ -1,69 +1,65 @@
 <?php
 
-require_once('config.php');
-require_once('functions.php');
+require_once 'config.php';
+require_once 'functions.php';
 
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-	// CSRF対策
-	setToken();
-}  else {
-	checkToken();
+    // CSRF対策
+    setToken();
+} else {
+    checkToken();
 
-	$name = $_POST['name'];
-	$email = $_POST['email'];
-	$password = $_POST['password'];
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-	$dbh = connectDb();
+    $dbh = connectDb();
 
-	$err = array();
+    $err = [];
 
-	// チェック：名前
-	if ($name == '') {
-		$err['name'] = 'お名前を入力してください';
-	}
+    // チェック：名前
+    if ($name == '') {
+        $err['name'] = 'お名前を入力してください';
+    }
 
-	// チェック：メール
-	if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-		$err['email'] = 'メールアドレスの形式が正しくありません';
-	}
+    // チェック：メール
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $err['email'] = 'メールアドレスの形式が正しくありません';
+    }
 
-	if (emailExists($email, $dbh)) {
-		$err['email'] = 'すでに登録されています';
-	}
+    if (emailExists($email, $dbh)) {
+        $err['email'] = 'すでに登録されています';
+    }
 
-	if ($email == '') {
-		$err['email'] = 'メールを入力してください';
-	}
+    if ($email == '') {
+        $err['email'] = 'メールを入力してください';
+    }
 
-	// チェック：パスワード
-	if ($password == '') {
-		$err['password'] = 'パスワードを入力してください';
-	}
+    // チェック：パスワード
+    if ($password == '') {
+        $err['password'] = 'パスワードを入力してください';
+    }
 
-	// エラーチェック
-	if (empty($err)) {
-		// 登録処理
-		$sql = "insert into users
+    // エラーチェック
+    if (empty($err)) {
+        // 登録処理
+        $sql = 'insert into users
 				(name, email, password, created, modified)
 				values
-				(:name, :email, :password, now(), now())";
-		$stmt = $dbh->prepare($sql);
-		$params = array(
-			":name" => $name,
-			":email" => $email,
-			":password" => getSha1Password($password)
-			);
-		$stmt->execute($params);
-		header('Location: '.SITE_URL.'login.php');
-		exit;
-	}
-
-
+				(:name, :email, :password, now(), now())';
+        $stmt = $dbh->prepare($sql);
+        $params = [
+            ':name'     => $name,
+            ':email'    => $email,
+            ':password' => getSha1Password($password),
+            ];
+        $stmt->execute($params);
+        header('Location: '.SITE_URL.'login.php');
+        exit;
+    }
 }
-
-
 
 ?>
 <!DOCTYPE html>

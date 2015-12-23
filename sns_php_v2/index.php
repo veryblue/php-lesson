@@ -1,23 +1,23 @@
 <?php
 
-require_once('config.php');
-require_once('functions.php');
+require_once 'config.php';
+require_once 'functions.php';
 
 session_start();
 
 if (empty($_SESSION['me'])) {
-	header('Location: '.SITE_URL.'login.php');
-	exit;
+    header('Location: '.SITE_URL.'login.php');
+    exit;
 }
 
 $me = $_SESSION['me'];
 
 $dbh = connectDb();
-$users = array();
+$users = [];
 
-$sql = "select * from users order by created desc";
+$sql = 'select * from users order by created desc';
 foreach ($dbh->query($sql) as $row) {
-	array_push($users, $row);
+    array_push($users, $row);
 }
 
 ?>

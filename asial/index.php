@@ -6,8 +6,8 @@
 </head>
 <body>
 <?php
-	// コメントアウト
-	print "はじめてのPHP!!";
+    // コメントアウト
+    echo 'はじめてのPHP!!';
 ?>
 
 <p><a href="phpinfo.php">phpinfo</a></p>
