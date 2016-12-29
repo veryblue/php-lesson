@@ -1,0 +1,5 @@
+{
+    "require": {
+        "polidog/esa-php": "^0.0.2"
+    }
+}
